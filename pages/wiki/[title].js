@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-
+const db = require('./db');
 
 const extractHtmlFromResponse = (data) => {
     const pages = data.query.pages;
@@ -20,7 +20,6 @@ const Wiki = () => {
     const router = useRouter();
     const [content, setContent] = useState('');
     const title = router.query.title;
-    var list_of_data;
 
     useEffect(() => {
         if (title) {
@@ -61,6 +60,13 @@ const Wiki = () => {
                             
                         }
                     }
+                    db.query('SELECT * FROM url')
+                    .then(results => {
+                        console.log(results);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
 
                 } catch (error) {
                     console.error("Error fetching data:", error);
