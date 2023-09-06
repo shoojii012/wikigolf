@@ -38,7 +38,7 @@ const Wiki = () => {
                         const response = await axios.get(`https://ja.wikipedia.org/w/api.php?origin=*&format=json&action=query&prop=revisions&titles=${title}&rvprop=content&rvparse`);
                         const htmlContent = extractHtmlFromResponse(response.data);
                         setContent(htmlContent);
-                        
+                        //必ず実行する初回のlinkを得るコマンドと、保存
                         var response_link = await axios.get(`https://ja.wikipedia.org/w/api.php?origin=*&format=json&action=query&prop=links&titles=${title}&pllimit=500`);
                         // console.log(response_link);
                         var links = response_link.data.query.pages[Object.keys(response_link.data.query.pages)[0]].links;
